@@ -1,0 +1,43 @@
+flowchart LR
+    subgraph IN["Sensing"]
+        FL["Flame sensor - Left"]
+        FF["Flame sensor - Forward"]
+        FR["Flame sensor - Right"]
+        GS["MQ-2 gas sensor"]
+    end
+
+    MCU["Arduino Uno<br/>(ATmega328P)"]
+
+    subgraph DRV["Locomotion"]
+        L293["L293D motor driver"]
+        ML["Left DC motor"]
+        MR["Right DC motor"]
+    end
+
+    subgraph EXT["Fire suppression"]
+        SRV["Servo motor<br/>(aims water container)"]
+        PUMP["5 V water pump"]
+    end
+
+    GSM["GSM module<br/>(SIM900-family shown in Proteus)"]
+
+    PSU12["12 V supply"]
+    PSU["Controller power supply"]
+
+    FL --> MCU
+    FF --> MCU
+    FR --> MCU
+    GS --> MCU
+    MCU --> L293
+    L293 --> ML
+    L293 --> MR
+    MCU --> SRV
+    MCU --> PUMP
+    MCU <-.-> GSM
+    PSU12 --> L293
+    PSU --> MCU
+
+    classDef confirmed fill:#d9f2d9,stroke:#2e7d32,color:#000;
+    classDef unverified fill:#fff3cd,stroke:#b58900,color:#000,stroke-dasharray: 4 3;
+    class FL,FF,FR,GS,MCU,L293,ML,MR,SRV,PUMP,PSU12,PSU confirmed;
+    class GSM unverified;

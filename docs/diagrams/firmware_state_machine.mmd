@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> Init
+    Init --> Patrol: GSM init attempted
+    Patrol --> Approach: flame confirmed
+    Patrol --> GasAlarm: MQ-2 above threshold
+    Approach --> Extinguish: forward sensor active for FORWARD_REACHED_MS
+    Approach --> Patrol: flame lost for FLAME_LOST_TIMEOUT_MS
+    Approach --> Alert: approach timeout (unreachable)
+    Approach --> GasAlarm: MQ-2 above threshold
+    Extinguish --> Verify: pump ran PUMP_RUN_MS
+    Verify --> Alert: flame gone (extinguished)
+    Verify --> Extinguish: flame remains and attempts left
+    Verify --> Alert: flame remains and attempts exhausted
+    Alert --> Lockout: SMS / call attempted
+    Lockout --> Patrol: cooldown elapsed
+    GasAlarm --> Patrol: MQ-2 back below clear level

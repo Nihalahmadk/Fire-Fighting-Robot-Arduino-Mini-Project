@@ -1,0 +1,17 @@
+flowchart TD
+    A(["Power on"]) --> B["Initialise sensors, actuators<br/>and GSM module"]
+    B --> C["Robot moves / scans<br/>(flowchart: 'Starts moving')"]
+    C --> D{"Flame sensor<br/>detects fire?"}
+    D -- "No" --> C
+    D -- "Yes" --> E["Sensor data sent to Arduino"]
+    E --> F["Arduino signals motor driver:<br/>robot stops"]
+    F --> G["Pump extinguishes fire"]
+    G --> H["Alert sent via GSM module<br/>(SMS shown in flowchart)"]
+    H --> I["Delay"]
+    I --> C
+
+    N1["Not shown in original flowchart:<br/>MQ-2 branch, direction selection,<br/>servo aiming, call alert, re-check of flame"]
+    H -.-> N1
+
+    classDef note fill:#fff3cd,stroke:#b58900,color:#000,stroke-dasharray: 4 3;
+    class N1 note;
