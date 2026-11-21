@@ -1,0 +1,28 @@
+flowchart TB
+    subgraph L1["Layer 1 - Sensing (inputs)"]
+        S1["3x IR flame sensor modules<br/>(left / forward / right)"]
+        S2["MQ-2 gas / smoke sensor"]
+    end
+    subgraph L2["Layer 2 - Processing"]
+        C1["Arduino Uno<br/>decision logic (firmware not in repo)"]
+    end
+    subgraph L3["Layer 3 - Actuation (outputs)"]
+        A1["L293D dual H-bridge"]
+        A2["DC drive motors"]
+        A3["Servo + 5 V water pump"]
+    end
+    subgraph L4["Layer 4 - Communication"]
+        K1["GSM module: SMS / call alert"]
+    end
+    subgraph L5["Layer 5 - Power"]
+        P1["12 V motor supply"]
+        P2["Logic / controller supply"]
+    end
+
+    S1 --> C1
+    S2 --> C1
+    C1 --> A1 --> A2
+    C1 --> A3
+    C1 --> K1
+    P1 --> A1
+    P2 --> C1

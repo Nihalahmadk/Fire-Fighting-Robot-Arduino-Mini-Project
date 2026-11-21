@@ -1,0 +1,33 @@
+flowchart LR
+    subgraph UNO["Arduino Uno (PROPOSED pin map, see firmware/FireFightingRobot/config.h)"]
+        D2["D2"]
+        D3["D3"]
+        D4["D4"]
+        A0["A0"]
+        D5["D5 PWM"]
+        D6["D6 PWM"]
+        D7["D7"]
+        D8["D8"]
+        D11["D11"]
+        D12["D12"]
+        D10["D10"]
+        A1["A1"]
+        D9["D9 RX"]
+        A3["A3 TX"]
+    end
+    D2 --- FL["Flame L: DO"]
+    D3 --- FF["Flame F: DO"]
+    D4 --- FR["Flame R: DO"]
+    A0 --- MQ["MQ-2: AO"]
+    D7 --- IN1["L293D IN1"]
+    D8 --- IN2["L293D IN2"]
+    D5 --- EN1["L293D EN1"]
+    D11 --- IN3["L293D IN3"]
+    D12 --- IN4["L293D IN4"]
+    D6 --- EN2["L293D EN2"]
+    D10 --- SV["Servo signal"]
+    A1 --- PD["Pump driver input<br/>(MOSFET gate / relay IN)"]
+    GRX["GSM TX"] --- D9
+    A3 --- GTX["GSM RX<br/>(level-shift if 3.3 V)"]
+    classDef prop fill:#fff3cd,stroke:#b58900,color:#000,stroke-dasharray: 4 3;
+    class FL,FF,FR,MQ,IN1,IN2,IN3,IN4,EN1,EN2,SV,PD,GTX,GRX prop;

@@ -1,0 +1,14 @@
+flowchart LR
+    BAT["Battery pack ~12 V<br/>(fuse + switch)"] --> L293["L293D motor supply (VS)"]
+    BAT --> VIN["Uno VIN"]
+    BAT --> BUCK["5 V buck converter, 3 A or more"]
+    BUCK --> SRV["Servo"]
+    BUCK --> PUMPD["Pump driver + 5 V pump"]
+    BUCK --> SENS["Flame sensors + MQ-2"]
+    BAT --> GBUCK["GSM supply<br/>(per module datasheet)"]
+    GBUCK --> GSM["GSM module"]
+    GND(("Common GND")) -.- BAT
+    GND -.- BUCK
+    GND -.- GBUCK
+    GND -.- UNO["Arduino Uno"]
+    VIN --> UNO
